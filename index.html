@@ -66,8 +66,8 @@
             -ms-user-select: none;
             user-select: none;
         }
+        /* default background for main counter */
         #p { background-image: url("imgs/p.png"); }
-        #op { background-image: url("imgs/op.png"); }
     </style>
 </head>
 <body>
@@ -76,7 +76,42 @@
             <img src="imgs/popcat.svg" alt="POPCAT" class="title-img">
         </div>
         <div class="text-box" id="p">0</div>
-        <div class="text-small" id="op">0</div>
     </div>
+
+    <!-- counter logic -->
+    <script>
+        // 計數器初始化
+        let count = 0;
+
+        // 取得顯示元素
+        const countEl = document.getElementById('p');
+
+        // 增加計數並在 console 觀察
+        function increment() {
+            count++;
+            console.log(count);
+        }
+
+        // 每次點擊時更新顯示
+        function updateDisplay() {
+            countEl.textContent = count;
+        }
+
+        // 整合：點擊時調用並切換圖片
+        function handleMouseDown() {
+            increment();
+            updateDisplay();
+            countEl.style.backgroundImage = 'url("imgs/op.png")';
+        }
+
+        function handleMouseUp() {
+            countEl.style.backgroundImage = 'url("imgs/p.png")';
+        }
+
+        // 註冊事件到 container
+        const container = document.querySelector('.container');
+        container.addEventListener('mousedown', handleMouseDown);
+        container.addEventListener('mouseup', handleMouseUp);
+    </script>
 </body>
 </html>
